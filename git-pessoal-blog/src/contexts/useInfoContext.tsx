@@ -53,8 +53,6 @@ export function UseInfoProvider({ children }: UseInfoProviderProviderProps) {
       },
     })
 
-    console.log(response.data)
-
     setuseInfo(response.data)
   }, [])
 
@@ -64,18 +62,16 @@ export function UseInfoProvider({ children }: UseInfoProviderProviderProps) {
 
   const [issuesInformation, setissuesInformation] = useState<Posts>({} as Posts)
   const [querySearch, setQuerySearch] = useState('')
-  const fetchIssues = useCallback(async (query?: string) => {
+  const fetchIssues = useCallback(async () => {
     const response = await api.get(
-      `/search/issues?q=${querySearch}%20repo:atailo/RocketSeat-DT-Money-Project`,
+      `/search/issues?q=${querySearch}
+        %20repo:atailo/RocketSeat-DT-Money-Project`,
     )
     setissuesInformation(response.data)
-    console.log(`o valor do response é ${response.data}`)
-  }, [])
+  }, [querySearch])
 
   useEffect(() => {
     fetchIssues()
-
-    console.log(`o valor do querySearch é ${querySearch}`)
   }, [fetchIssues, querySearch])
 
   return (

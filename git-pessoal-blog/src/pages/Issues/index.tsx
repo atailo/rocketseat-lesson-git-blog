@@ -1,6 +1,5 @@
 import { Resume } from '../../components/Geral_Resume'
 import { Search } from './components/Search'
-import { useNavigate } from 'react-router-dom'
 import {
   IssuesCard,
   IssuesCardText,
@@ -14,14 +13,7 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
 export function Issues() {
-  const navigate = useNavigate()
-  const routeChange = () => {
-    const path = `detail`
-    navigate(path)
-  }
-
   const { issuesInformation } = useContext(UseInfoContext)
-  console.log(issuesInformation)
 
   return (
     <IssuesContainer>
@@ -29,12 +21,14 @@ export function Issues() {
       <Search />
       <IssuesList>
         {issuesInformation?.items?.map((post) => (
-          <IssuesCard onClick={routeChange} key={post.id}>
+          <IssuesCard key={post.id}>
             <IssuesCardTitle>
-              <h2>
-                {post.title.substring(0, 35)}
-                {post.title.length > 30 ? '...' : ''}
-              </h2>
+              <a href={`detail/${post.number}`}>
+                <h2>
+                  {post.title.substring(0, 35)}
+                  {post.title.length > 30 ? '...' : ''}
+                </h2>
+              </a>
               <h4>
                 {format(new Date(post.created_at), 'P', {
                   locale: ptBR,

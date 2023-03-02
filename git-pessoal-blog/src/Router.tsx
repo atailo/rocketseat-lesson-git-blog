@@ -8,7 +8,7 @@ export function Router() {
     <Routes>
       <Route path="/" element={<DefaltLayout />}>
         <Route path="/" element={<Issues />} />
-        <Route path="/detail" element={<IssueDetail />} />
+        <Route path="/detail/:id" element={<IssueDetail />} />
       </Route>
     </Routes>
   )
